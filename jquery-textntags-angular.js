@@ -6,7 +6,8 @@ app.directive('texttags', function () {
         scope: { ngModelTags: '=', ngModel: '=' },
         template: '<textarea placeholder="Digite seu post", data-ng-model="ngModel"></textarea>',
         link: function (scope, element, attrs) {
-            $(element).find('textarea').textntags({
+            var target = $(element).find('textarea');
+            target.textntags({
                  triggers: {'#': {
                     uniqueTags   : true,
                     syntax       : _.template('#[<%= id %>:<%= type %>:<%= title %>]'),
@@ -32,15 +33,15 @@ app.directive('texttags', function () {
                 }
             });            
 
-            $(element).find('textarea').bind('tagsAdded.textntags', function (e, addedTagsList) {                 
-                $(element).find('textarea').textntags('getTags', function(data) {                    
+            target.bind('tagsAdded.textntags', function (e, addedTagsList) {                 
+                target.textntags('getTags', function(data) {                    
                     scope.ngModelTags = data;
                     scope.$apply();
                 });
             });
 
-             $(element).find('textarea').bind('tagsRemoved.textntags', function (e, addedTagsList) {                 
-                $(element).find('textarea').textntags('getTags', function(data) {                    
+             target.bind('tagsRemoved.textntags', function (e, addedTagsList) {                 
+                target.textntags('getTags', function(data) {                    
                     scope.ngModelTags = data;
                     scope.$apply();
                 });
