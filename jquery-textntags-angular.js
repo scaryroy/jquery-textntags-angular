@@ -34,6 +34,7 @@ app.directive('texttags', function () {
             });            
 
             target.bind('tagsAdded.textntags', function (e, addedTagsList) {                 
+                target.trigger("change");
                 target.textntags('getTags', function(data) {                    
                     scope.ngModelTags = data;
                     scope.$apply();
